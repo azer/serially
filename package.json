@@ -1,0 +1,29 @@
+{
+  "name": "serially",
+  "version": "0.0.0",
+  "description": "Compose async functions into one function that runs all serially",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "devDependencies": {
+    "prova": "*"
+  },
+  "keywords": [
+    "serial",
+    "series",
+    "async",
+    "flow",
+    "flow control",
+    "serially"
+  ],
+  "repository": {
+    "url": "git@github.com:azer/serially.git",
+    "type": "git"
+  },
+  "author": "azer",
+  "license": "BSD",
+  "dependencies": {
+    "serial-loop": "0.0.0"
+  }
+}
