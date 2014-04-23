@@ -6,6 +6,7 @@ function serially (fn, params) {
   var fns = [];
 
   call.add = add;
+  call.then = add;
   return call;
 
   function call (callback) {
