@@ -1,6 +1,6 @@
 {
   "name": "serially",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Compose async functions into one function that runs all serially",
   "main": "index.js",
   "scripts": {
