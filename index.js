@@ -7,6 +7,8 @@ function serially (fn, params) {
 
   call.add = add;
   call.then = add;
+  call.done = call;
+
   return call;
 
   function call (callback) {
