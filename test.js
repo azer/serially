@@ -33,6 +33,18 @@ test('stops at error', function (assert) {
   });
 });
 
+test('fails if undefined functions given', function (assert) {
+  assert.plan(2);
+
+  try {
+    serially()
+      .then(undefined, 'fail');
+  } catch (err) {
+    assert.equal(err.message, "serially: Undefined function given");
+    assert.ok(err);
+  }
+});
+
 function foo (pa, ra, ms, callback) {
   callback(undefined, pa + '\n' + ra + '\n' + ms);
 }

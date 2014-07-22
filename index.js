@@ -35,11 +35,11 @@ function serially (fn, params) {
     if (typeof alias != 'string') {
       params = fn;
       fn = alias;
-      alias = fn.name;
+      alias = fn && fn.name;
     }
 
-    if (!alias) {
-      throw new Error('Function does not have a name. Either declare it with a name or specify an alias.');
+    if (typeof fn == 'undefined') {
+      throw new Error('serially: Undefined function given');
     }
 
     fns.push({ alias: alias, fn: fn, params: params });
