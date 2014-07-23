@@ -2,7 +2,7 @@
 
 Compose async functions into one function that runs all serially
 
-See also: [parellelly](http://github.com/azer/parellelly)
+See also: [parallelly](http://github.com/azer/parallelly)
 
 ## Install
 
