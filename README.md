@@ -2,6 +2,8 @@
 
 Compose async functions into one function that runs all serially
 
+See also: [parellelly](http://github.com/azer/parellelly)
+
 ## Install
 
 ```bash
