@@ -2,36 +2,18 @@ var loop = require("serial-loop");
 
 module.exports = serially;
 
-function serially (fn, params) {
+function serially () {
   var fns = [];
 
-  call.add = add;
-  call.then = add;
-  call.done = call;
+  var self = {
+    then: then,
+    done: call,
+    end: call
+  };
 
-  return call;
+  return self;
 
-  function call (callback) {
-    var results = [];
-
-    loop(fns.length, each, function (error) {
-      callback(error, results);
-    });
-
-    function each (done, i) {
-      var params = fns[i].params ? fns[i].params.slice() : [];
-
-      params.push(function callback (error) {
-        if (error) return done(error);
-        results[fns[i].alias] = Array.prototype.slice.call(arguments, 1);
-        done();
-      });
-
-      fns[i].fn.apply(undefined, params);
-    }
-  }
-
-  function add (alias, fn, params) {
+  function then (alias, fn, params) {
     if (typeof alias != 'string') {
       params = fn;
       fn = alias;
@@ -44,6 +26,34 @@ function serially (fn, params) {
 
     fns.push({ alias: alias, fn: fn, params: params });
 
-    return call;
+    return self;
   }
+
+  function call (callback) {
+    var results = {};
+    var len = fns.length;
+
+    (function next (i, error) {
+      if (error) return callback(error, results);
+
+      if (i >= len) return callback(undefined, results);
+
+      var params = fns[i].params;
+
+      if (!params) {
+        params = [];
+      } else {
+        params = params.slice();
+      }
+
+      params.push(function (error) {
+        if (error) return next(i + 1, error);
+        results[fns[i].alias] = Array.prototype.slice.call(arguments, 1);
+        next(i+1);
+      });
+
+      fns[i].fn.apply(undefined, params);
+    }(0));
+  }
+
 }
