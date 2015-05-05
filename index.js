@@ -7,6 +7,7 @@ function serially () {
 
   var self = {
     then: then,
+    run: then,
     done: call,
     end: call
   };
