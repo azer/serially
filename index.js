@@ -2,7 +2,9 @@ var loop = require("serial-loop");
 
 module.exports = serially;
 
-function serially () {
+function serially (options) {
+  options || (options = {});
+
   var fns = [];
 
   var self = {
@@ -53,7 +55,7 @@ function serially () {
         next(i+1);
       });
 
-      fns[i].fn.apply(undefined, params);
+      fns[i].fn.apply(options.context, params);
     }(0));
   }
 
